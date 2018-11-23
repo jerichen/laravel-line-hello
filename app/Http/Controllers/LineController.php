@@ -6,20 +6,41 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Log;
 
+use LINE\LINEBot;
+use LINE\LINEBot\Constant\HTTPHeader;
+use LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use LINE\LINEBot\MessageBuilder;
+use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+
 class LineController extends Controller
 {
     protected $channel_access_token;
     protected $password;
     protected $headers;
 
-    public function __construct()
+    private $client;
+    private $bot;
+    private $events;
+    private $replyToken;
+    private $text;
+    private $to;
+
+    public function __construct(Request $request)
     {
-        $this->channel_access_token = env('LINE_CHANNEL_ACCESS_TOKEN');
-        $this->password = 'opendoor';
-        $this->headers = [
-            'Content-Type' => 'application/json',
-            'Authorization' => "Bearer {$this->channel_access_token}",
-        ];
+        $this->client = new CurlHTTPClient(env('LINE_CHANNEL_ACCESS_TOKEN'));
+        $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_CHANNEL_SECRET'));
+        $signature = $request->header(HTTPHeader::LINE_SIGNATURE);
+        if (!empty($signature)) {
+            $this->events = $this->bot->parseEventRequest($request->getContent(), $signature);
+        }
+
+//        $this->channel_access_token = env('LINE_CHANNEL_ACCESS_TOKEN');
+//        $this->password = 'opendoor';
+//        $this->headers = [
+//            'Content-Type' => 'application/json',
+//            'Authorization' => "Bearer {$this->channel_access_token}",
+//        ];
     }
 
     public function reply(Request $request)
