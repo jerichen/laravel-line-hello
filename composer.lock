@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "523d72b5834c767a24d90af42ef069c7",
+    "content-hash": "8156a9a84d1ec6ef3e16f6d0396916e7",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -311,111 +311,6 @@
                 "parser"
             ],
             "time": "2018-03-08T01:11:30+00:00"
-        },
-        {
-            "name": "fei77/line-bot",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Fei77/line-bot.git",
-                "reference": "d5d40ee06ff5ca2a9a362671c443117834f35cd4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Fei77/line-bot/zipball/d5d40ee06ff5ca2a9a362671c443117834f35cd4",
-                "reference": "d5d40ee06ff5ca2a9a362671c443117834f35cd4",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.1",
-                "linecorp/line-bot-sdk": "^2.3"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Fei77\\LineBot\\LineServiceProvider"
-                    ],
-                    "aliases": {
-                        "Line": "Fei77\\LineBot\\Line"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Fei77\\LineBot\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fei77",
-                    "email": "fei@feilink.net"
-                }
-            ],
-            "description": "Laravel Line Bot package",
-            "keywords": [
-                "Fei77",
-                "linebot"
-            ],
-            "time": "2017-12-26T16:46:17+00:00"
-        },
-        {
-            "name": "fideloper/proxy",
-            "version": "4.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fideloper/TrustedProxy.git",
-                "reference": "cf8a0ca4b85659b9557e206c90110a6a4dba980a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/cf8a0ca4b85659b9557e206c90110a6a4dba980a",
-                "reference": "cf8a0ca4b85659b9557e206c90110a6a4dba980a",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/contracts": "~5.0",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "illuminate/http": "~5.6",
-                "mockery/mockery": "~1.0",
-                "phpunit/phpunit": "^6.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Fideloper\\Proxy\\TrustedProxyServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Fideloper\\Proxy\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Fidao",
-                    "email": "fideloper@gmail.com"
-                }
-            ],
-            "description": "Set trusted proxies for Laravel",
-            "keywords": [
-                "load balancing",
-                "proxy",
-                "trusted proxy"
-            ],
-            "time": "2018-02-07T20:20:57+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -979,27 +874,36 @@
         },
         {
             "name": "linecorp/line-bot-sdk",
-            "version": "2.3.0",
+            "version": "3.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/line/line-bot-sdk-php.git",
-                "reference": "38528aaa3a1abc2809974ab65cdcb7579f9eb927"
+                "reference": "3cf91f95f1e07b8c84a6e02b8afc947ea37984c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/line/line-bot-sdk-php/zipball/38528aaa3a1abc2809974ab65cdcb7579f9eb927",
-                "reference": "38528aaa3a1abc2809974ab65cdcb7579f9eb927",
+                "url": "https://api.github.com/repos/line/line-bot-sdk-php/zipball/3cf91f95f1e07b8c84a6e02b8afc947ea37984c6",
+                "reference": "3cf91f95f1e07b8c84a6e02b8afc947ea37984c6",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-posix": "*",
+                "ext-sockets": "*",
+                "php": ">=5.5"
             },
             "require-dev": {
-                "apigen/apigen": "~4.1",
                 "indigophp/hash-compat": "~1.1.0",
                 "phpmd/phpmd": "~2.4",
-                "phpunit/phpunit": "^4.8.24",
-                "squizlabs/php_codesniffer": "~2.6"
+                "phpunit/phpunit": "^4.8.24||^5||^6",
+                "squizlabs/php_codesniffer": "~2.6||^3",
+                "symfony/config": "^3.3",
+                "symfony/dependency-injection": "^3.3"
+            },
+            "suggest": {
+                "apigen/apigen": "Install with roave/better-reflection:dev-master to generate docs",
+                "roave/better-reflection": "Required by apigen/apigen:dev-master"
             },
             "type": "library",
             "autoload": {
@@ -1009,16 +913,23 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache License Version 2.0"
+                "Apache-2.0"
             ],
             "authors": [
                 {
                     "name": "moznion",
-                    "email": "moznion@gmail.com"
+                    "email": "moznion@gmail.com",
+                    "role": "Retired"
                 },
                 {
                     "name": "Satoru Yoshihara",
-                    "email": "vaduz0@gmail.com"
+                    "email": "vaduz0@gmail.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Satoshi Shibuya",
+                    "email": "satosby@gmail.com",
+                    "role": "Maintainer"
                 }
             ],
             "description": "SDK of the LINE BOT API for PHP",
@@ -1028,7 +939,7 @@
                 "line",
                 "sdk"
             ],
-            "time": "2017-09-20T10:22:04+00:00"
+            "time": "2018-10-26T08:48:34+00:00"
         },
         {
             "name": "monolog/monolog",

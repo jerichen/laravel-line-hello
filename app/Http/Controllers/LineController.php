@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Log;
-use Line;
 
 class LineController extends Controller
 {
@@ -61,11 +60,5 @@ class LineController extends Controller
             Log::info("line-push-response-status-code: " . $response_status_code);
             Log::info(date('Y-m-d h:i:s').' line Reply end');
         }
-    }
-
-    public function webhook(Request $request)
-    {
-        $bot = new Line($request);
-        $bot->hears('hello')->reply('hi there!');
     }
 }
