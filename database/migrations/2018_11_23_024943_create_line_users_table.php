@@ -6,8 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateLineUsersTable extends Migration
 {
-    protected $connection = 'pgsql';
-
     /**
      * Run the migrations.
      *

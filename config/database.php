@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'pgsql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -30,7 +30,6 @@ return [
     | choice installed on your machine before you begin development.
     |
     */
-    $DATABASE_URL = parse_url(env('DATABASE_URL')),
 
     'connections' => [
 
@@ -58,16 +57,14 @@ return [
         ],
 
         'pgsql' => [
-            'driver' => 'pgsql',
-            'host' => $DATABASE_URL["host"],
-            'port' => $DATABASE_URL["port"],
-            'database' => ltrim($DATABASE_URL["path"], "/"),
-            'username' => $DATABASE_URL["user"],
-            'password' => $DATABASE_URL["pass"],
-            'charset' => 'utf8',
-            'prefix' => '',
-            'schema' => 'public',
-            'sslmode' => 'require',
+            'driver'   => 'pgsql',
+            'host'     => parse_url(env("DATABASE_URL"))["host"],
+            'database' => substr(parse_url(env("DATABASE_URL"))["path"], 1),
+            'username' => parse_url(env("DATABASE_URL"))["user"],
+            'password' => parse_url(env("DATABASE_URL"))["pass"],
+            'charset'  => 'utf8',
+            'prefix'   => '',
+            'schema'   => 'public',
         ],
 
         'sqlsrv' => [
