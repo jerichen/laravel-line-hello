@@ -5,13 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Log;
-
-use LINE\LINEBot;
-use LINE\LINEBot\Constant\HTTPHeader;
-use LINE\LINEBot\HTTPClient\CurlHTTPClient;
-use LINE\LINEBot\MessageBuilder;
-use LINE\LINEBot\MessageBuilder\TextMessageBuilder;
-use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+use Line;
 
 class LineController extends Controller
 {
@@ -19,28 +13,14 @@ class LineController extends Controller
     protected $password;
     protected $headers;
 
-    private $client;
-    private $bot;
-    private $events;
-    private $replyToken;
-    private $text;
-    private $to;
-
-    public function __construct(Request $request)
+    public function __construct()
     {
-        $this->client = new CurlHTTPClient(env('LINE_CHANNEL_ACCESS_TOKEN'));
-        $this->bot = new LINEBot($this->client, ['channelSecret' => env('LINE_CHANNEL_SECRET'));
-        $signature = $request->header(HTTPHeader::LINE_SIGNATURE);
-        if (!empty($signature)) {
-            $this->events = $this->bot->parseEventRequest($request->getContent(), $signature);
-        }
-
-//        $this->channel_access_token = env('LINE_CHANNEL_ACCESS_TOKEN');
-//        $this->password = 'opendoor';
-//        $this->headers = [
-//            'Content-Type' => 'application/json',
-//            'Authorization' => "Bearer {$this->channel_access_token}",
-//        ];
+        $this->channel_access_token = env('LINE_CHANNEL_ACCESS_TOKEN');
+        $this->password = 'opendoor';
+        $this->headers = [
+            'Content-Type' => 'application/json',
+            'Authorization' => "Bearer {$this->channel_access_token}",
+        ];
     }
 
     public function reply(Request $request)
@@ -81,5 +61,11 @@ class LineController extends Controller
             Log::info("line-push-response-status-code: " . $response_status_code);
             Log::info(date('Y-m-d h:i:s').' line Reply end');
         }
+    }
+
+    public function webhook(Request $request)
+    {
+        $bot = new Line($request);
+        $bot->hears('hello')->reply('hi there!');
     }
 }
