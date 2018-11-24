@@ -64,6 +64,30 @@ class LineController extends Controller
 
     public function webhook(Request $request)
     {
-        dd($request);
+
+//        $body_msg = file_get_contents('php://input');
+        $post_params = [
+            'replyToken' => 'U7fe6e83736d4b24979f8d2f7027e4652',
+            'messages' => [
+                [
+                    'type' => 'text',
+                    'text' => 'Login Success! Wellcome!'
+                ]
+            ]
+        ];
+
+        Log::info(date('Y-m-d h:i:s').' line Reply start');
+
+        $url = 'https://api.line.me/v2/bot/message/reply';
+        $method = 'POST';
+        $client = new Client();
+        $data = [
+            RequestOptions::JSON => $post_params,
+            RequestOptions::HEADERS => $this->headers,
+            'User-Agent' => 'JeriBot',
+        ];
+
+        $response = $client->request($method, $url, $data);
+        $response_status_code = $response->getStatusCode();
     }
 }
