@@ -64,21 +64,20 @@ class LineController extends Controller
 
     public function webhook(Request $request)
     {
+        Log::info(date('Y-m-d h:i:s').' line push start');
 
-//        $body_msg = file_get_contents('php://input');
+        $user_ids[] = 'U7fe6e83736d4b24979f8d2f7027e4652';
         $post_params = [
-            'replyToken' => 'U7fe6e83736d4b24979f8d2f7027e4652',
+            'to' => $user_ids,
             'messages' => [
                 [
                     'type' => 'text',
-                    'text' => 'Login Success! Wellcome!'
+                    'text' => 'Hello World!!XD'
                 ]
             ]
         ];
 
-        Log::info(date('Y-m-d h:i:s').' line Reply start');
-
-        $url = 'https://api.line.me/v2/bot/message/reply';
+        $url = 'https://api.line.me/v2/bot/message/multicast';
         $method = 'POST';
         $client = new Client();
         $data = [
@@ -89,5 +88,8 @@ class LineController extends Controller
 
         $response = $client->request($method, $url, $data);
         $response_status_code = $response->getStatusCode();
+
+        Log::info("line-push-response-status-code: " . $response_status_code);
+        Log::info(date('Y-m-d h:i:s').' line push end');
     }
 }
