@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Log;
+use App\Models\Entities\LineUser;
 
 class LineController extends Controller
 {
