@@ -7,10 +7,6 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Log;
 
-use LINE\LINEBot;
-use LINE\LINEBot\Constant\HTTPHeader;
-use LINE\LINEBot\HTTPClient\CurlHTTPClient;
-
 class LinePush extends Command
 {
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
 use Log;
 
 class LineController extends Controller
@@ -64,8 +65,6 @@ class LineController extends Controller
 
     public function webhook(Request $request)
     {
-        Log::info(date('Y-m-d h:i:s').' line push start');
-
         $user_ids[] = 'U7fe6e83736d4b24979f8d2f7027e4652';
         $post_params = [
             'to' => $user_ids,
@@ -90,6 +89,5 @@ class LineController extends Controller
         $response_status_code = $response->getStatusCode();
 
         Log::info("line-push-response-status-code: " . $response_status_code);
-        Log::info(date('Y-m-d h:i:s').' line push end');
     }
 }
