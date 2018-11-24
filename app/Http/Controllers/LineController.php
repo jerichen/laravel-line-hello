@@ -61,4 +61,9 @@ class LineController extends Controller
             Log::info(date('Y-m-d h:i:s').' line Reply end');
         }
     }
+
+    public function webhook(Request $request)
+    {
+        dd($request);
+    }
 }
