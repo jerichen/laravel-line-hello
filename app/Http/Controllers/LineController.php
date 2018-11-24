@@ -29,32 +29,52 @@ class LineController extends Controller
         foreach ($events as $event) {
             Log::info("event: " . print_r($event, true));
 
+            // bot dirty logic
+            if($event['message']['type'] === 'text'){
+                if ($event['message']['text'] === $this->password) {
+
+                    $line_user = LineUser::updateOrCreate(
+                        ['user_id' => $event['source']['userId']],
+                        [
+                            'reply_token' => $event['replyToken'],
+                            'message' => $event['message']['text'],
+                        ]
+                    );
+                    Log::info("line_user: " . print_r($line_user, true));
+
+                    $reply_message = 'Login Success! Wellcome!';
+
+                } else {
+                    $reply_message = 'Input password please.';
+                }
+            }
+
             $post_params = [
                 'replyToken' => $event['replyToken'],
                 'messages' => [
                     [
                         'type' => 'text',
-                        'text' => 'Login Success! Wellcome!'
+                        'text' => $reply_message
                     ]
                 ]
             ];
 
-            Log::info(date('Y-m-d h:i:s').' line Reply start');
+            Log::info(date('Y-m-d h:i:s') . ' line Reply start');
 
             $url = 'https://api.line.me/v2/bot/message/reply';
             $method = 'POST';
             $client = new Client();
-            $data = [
+            $post_data = [
                 RequestOptions::JSON => $post_params,
                 RequestOptions::HEADERS => $this->headers,
                 'User-Agent' => 'JeriBot',
             ];
 
-            $response = $client->request($method, $url, $data);
+            $response = $client->request($method, $url, $post_data);
             $response_status_code = $response->getStatusCode();
 
             Log::info("line-push-response-status-code: " . $response_status_code);
-            Log::info(date('Y-m-d h:i:s').' line Reply end');
+            Log::info(date('Y-m-d h:i:s') . ' line Reply end');
         }
     }
 
@@ -69,12 +89,12 @@ class LineController extends Controller
                 'messages' => [
                     [
                         'type' => 'text',
-                        'text' => $event['message']['text']
+                        'text' => 'Login Success! Wellcome!'
                     ]
                 ]
             ];
 
-            Log::info(date('Y-m-d h:i:s').' line Reply start');
+            Log::info(date('Y-m-d h:i:s') . ' line Reply start');
 
             $url = 'https://api.line.me/v2/bot/message/reply';
             $method = 'POST';
@@ -89,7 +109,7 @@ class LineController extends Controller
             $response_status_code = $response->getStatusCode();
 
             Log::info("line-push-response-status-code: " . $response_status_code);
-            Log::info(date('Y-m-d h:i:s').' line Reply end');
+            Log::info(date('Y-m-d h:i:s') . ' line Reply end');
         }
     }
 }
