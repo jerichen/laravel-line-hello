@@ -65,6 +65,10 @@ class LineController extends Controller
 
     public function webhook(Request $request)
     {
+        Log::info("request: " . print_r($request, true));
+        $events = $request->get('events');
+        Log::info("events: " . print_r($events, true));
+
         $user_ids[] = 'U7fe6e83736d4b24979f8d2f7027e4652';
         $post_params = [
             'to' => $user_ids,
