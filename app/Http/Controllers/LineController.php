@@ -69,7 +69,7 @@ class LineController extends Controller
                 'messages' => [
                     [
                         'type' => 'text',
-                        'text' => 'Login Success! Wellcome!'
+                        'text' => $event['message']['text']
                     ]
                 ]
             ];
