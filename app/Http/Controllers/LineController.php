@@ -57,4 +57,39 @@ class LineController extends Controller
             Log::info(date('Y-m-d h:i:s').' line Reply end');
         }
     }
+
+    public function webhook(Request $request)
+    {
+        $events = $request->get('events');
+        foreach ($events as $event) {
+            Log::info("event: " . print_r($event, true));
+
+            $post_params = [
+                'replyToken' => $event['replyToken'],
+                'messages' => [
+                    [
+                        'type' => 'text',
+                        'text' => 'Login Success! Wellcome!'
+                    ]
+                ]
+            ];
+
+            Log::info(date('Y-m-d h:i:s').' line Reply start');
+
+            $url = 'https://api.line.me/v2/bot/message/reply';
+            $method = 'POST';
+            $client = new Client();
+            $data = [
+                RequestOptions::JSON => $post_params,
+                RequestOptions::HEADERS => $this->headers,
+                'User-Agent' => 'JeriBot',
+            ];
+
+            $response = $client->request($method, $url, $data);
+            $response_status_code = $response->getStatusCode();
+
+            Log::info("line-push-response-status-code: " . $response_status_code);
+            Log::info(date('Y-m-d h:i:s').' line Reply end');
+        }
+    }
 }
