@@ -1,8 +1,5 @@
 <?php
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index')->name('index');
 
 // line-bot
 Route::post('line/reply', 'LineController@reply')->name('line.reply');

@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -46,6 +47,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        $status_code = $exception->getStatusCode();
+        if($status_code == '404'){
+            $url = $request->fullUrl();
+            Artisan::call('line:push', ['url' => $url]);
+        }
+
         return parent::render($request, $exception);
     }
 }

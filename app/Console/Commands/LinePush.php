@@ -14,7 +14,7 @@ class LinePush extends Command
      *
      * @var string
      */
-    protected $signature = 'line-push';
+    protected $signature = 'line:push {url}';
 
     /**
      * The console command description.
@@ -48,13 +48,14 @@ class LinePush extends Command
     {
         Log::info(date('Y-m-d h:i:s').' line push start');
 
+        $url = $this->argument('url');
         $user_ids[] = 'U7fe6e83736d4b24979f8d2f7027e4652';
         $post_params = [
             'to' => $user_ids,
             'messages' => [
                 [
                     'type' => 'text',
-                    'text' => 'Hello World!!XD'
+                    'text' => $url . ' Is 404 oops!!',
                 ]
             ]
         ];
