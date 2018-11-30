@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Log;
+use App\Models\Entities\LineUser;
 
 class LinePush extends Command
 {
@@ -49,7 +50,8 @@ class LinePush extends Command
         Log::info(date('Y-m-d h:i:s').' line push start');
 
         $url = $this->argument('url');
-        $user_ids[] = 'U7fe6e83736d4b24979f8d2f7027e4652';
+        $user_ids = LineUser::all()->pluck('user_id');
+
         $post_params = [
             'to' => $user_ids,
             'messages' => [
