@@ -50,6 +50,7 @@ class LinePush extends Command
         Log::info(date('Y-m-d h:i:s').' line push start');
 
         $url = $this->argument('url');
+        $message = $this->argument('message');
         $user_ids = LineUser::all()->pluck('user_id');
 
         $post_params = [
@@ -57,7 +58,7 @@ class LinePush extends Command
             'messages' => [
                 [
                     'type' => 'text',
-                    'text' => $url . ' Is 404 oops!!',
+                    'text' => $url . $message,
                 ]
             ]
         ];

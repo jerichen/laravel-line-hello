@@ -50,7 +50,18 @@ class Handler extends ExceptionHandler
         $status_code = $exception->getStatusCode();
         if($status_code == '404'){
             $url = $request->fullUrl();
-            Artisan::call('line:push', ['url' => $url]);
+            Artisan::call('line:push', [
+                'url' => $url,
+                'message' => ' 404 Not Found',
+            ]);
+        }
+
+        if($status_code == '500'){
+            $url = $request->fullUrl();
+            Artisan::call('line:push', [
+                'url' => $url,
+                'message' => ' 500 Internal Server Error',
+            ]);
         }
 
         return parent::render($request, $exception);
