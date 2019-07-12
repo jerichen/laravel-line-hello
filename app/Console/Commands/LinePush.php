@@ -15,7 +15,7 @@ class LinePush extends Command
      *
      * @var string
      */
-    protected $signature = 'line:push {url}';
+    protected $signature = 'line:push {url} {message}';
 
     /**
      * The console command description.
