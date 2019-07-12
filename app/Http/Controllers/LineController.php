@@ -17,7 +17,7 @@ class LineController extends Controller
     public function __construct()
     {
         $this->channel_access_token = env('LINE_CHANNEL_ACCESS_TOKEN');
-        $this->password = 'opendoor';
+        $this->password = 'openpushme';
         $this->headers = [
             'Content-Type' => 'application/json',
             'Authorization' => "Bearer {$this->channel_access_token}",
