@@ -1,6 +1,6 @@
 ## About Laravel-line-hello Example
 <p align="center">
-<img src="https://qr-official.line.me/sid/L/bek2088k.png?raw=true">
+<img src="https://laravel-line-hello.herokuapp.com/image/qu.png">
 </p>
 
 #### User Story
